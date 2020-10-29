@@ -1,0 +1,34 @@
+
+# Georgi
+Database: 
+  ✔ Server @done(20-10-29 12:09)
+  ✔ Connection to server @done(20-10-29 12:46)
+  ☐ Connection with admin app for adding new data
+  ☐ Adding data
+
+Admin app:
+  ☐ Functionality for managing users
+  ☐ Functionality for viewing and answering complaints (?)
+  ☐ Functionality for entering new offers
+  ☐ Functionality for sending data to database
+
+# Martin
+Project design:
+  ☐ Design mockup
+  ☐ Skeleton of design
+  ☐ Complete design
+
+#-
+Client app:
+  ☐ Functionality for choosing period of time
+  ☐ Functionality for choosing route
+  ☐ Functionality for choosing offer
+  ☐ Functionality for buying product
+  ☐ Functionality for sending recepit (OPTIONAL)
+
+#-
+Complaint (forum) app:
+  ☐ User login check
+  ☐ Functionality for browsing complaints
+  ☐ Functionality for writing complaint
+  ☐ Notification upon receiving answer (OPTIONAL)
