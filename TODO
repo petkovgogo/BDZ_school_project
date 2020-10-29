@@ -17,6 +17,7 @@ Project design:
 
 #-
 Client app:
+  ☐ Register and log in
   ☐ Functionality for choosing period of time
   ☐ Functionality for choosing route
   ☐ Functionality for choosing offer
