@@ -3,14 +3,11 @@
 Database: 
   ✔ Server @done(20-10-29 12:09)
   ✔ Connection to server @done(20-10-29 12:46)
-  ☐ Connection with admin app for adding new data
   ☐ Adding data
 
 Admin app:
-  ☐ Functionality for managing users
-  ☐ Functionality for viewing and answering complaints (?)
-  ☐ Functionality for entering new offers
-  ☐ Functionality for sending data to database
+  ☐ Offers
+  ☐ Tickets
 
 # Martin
 Project design:
@@ -30,5 +27,6 @@ Client app:
 Complaint (forum) app:
   ☐ User login check
   ☐ Functionality for browsing complaints
-  ☐ Functionality for writing complaint
+  ☐ Functionality for writing a complaint
+  ☐ Functionality for viewing and answering complaints
   ☐ Notification upon receiving answer (OPTIONAL)
