@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
-    return HttpResponse('Hello')
+    return render(request, 'client/index.html', {})
 
 def register_user(request):
     first_name = request.POST('first_name')
