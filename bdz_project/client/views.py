@@ -3,13 +3,25 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 
 def index(request):
     return render(request, 'client/register.html', {})
 
+
 def login_user(request):
-    email = request.POST('email')
-    password = request.POST('password')
+    return render(request, 'client/login.html', {})
+
+def authenticate_user(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect(reverse('client:index'))
+    else:
+        return HttpResponseRedirect(reverse('client:login'))
+
 
 def register_user(request):
     first_name = request.POST('first_name')
