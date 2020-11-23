@@ -17,9 +17,10 @@ def authenticate_user(request):
         return HttpResponseRedirect(reverse('client:index'))
     else:
         context = {
-            'message': True,
+            'message': True
         }
-        return HttpResponseRedirect(reverse('client:login', context))
+
+        return render(request, 'client/login.html', context)
 
 def index(request):
     return render(request, 'client/index.html', {})
