@@ -3,11 +3,11 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Station(models.Model):
-    name = models.CharField(max_length=20)
+    station_name = models.CharField(max_length=20)
     location = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.station_name
 
 class TicketType(models.Model):
     ticket_type = models.CharField(max_length=20)
