@@ -2,22 +2,24 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 class Station(models.Model):
-    name = models.CharField(max_length=20)
+    station_name = models.CharField(max_length=20)
     location = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.station_name
+
 
 class TicketType(models.Model):
     ticket_type = models.CharField(max_length=20)
+    price = models.FloatField(default=0.0)
     
     def __str__(self):
         return 'Ticket type: ' + self.ticket_type
 
 class Ticket(models.Model):
     user_id = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-    price = models.FloatField(default=0.0)
     ticket_type_id = models.ForeignKey(TicketType, related_name='ticket_type_id', default=None, on_delete=models.CASCADE)
     created_date = models.DateTimeField('created date', default=timezone.now)
 
