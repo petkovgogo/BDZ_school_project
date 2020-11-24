@@ -1,13 +1,13 @@
 {% extends "client/base.html" %}
 {% block title %} Login {% endblock %}
 {% block content %}
-<h1>{{ message }}</h1>
+{% load static %}
+
 <form action="{% url 'client:auth' %}" method="POST">
   {% csrf_token %}
 
-  {% if message %}
-  <script
-    type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
+  {% if form.errors %}
+    <script type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Invalid credentials")</script>
   {% endif %}
 
   <div class="form-group col-md-4 mb-3">

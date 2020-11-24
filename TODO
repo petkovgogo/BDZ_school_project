@@ -17,7 +17,7 @@ Project design:
 
 # Ivan, Ijo
 Client app:
-  ☐ Register and log in
+  ✔ Register and log in @done(20-11-24 22:15)
   ☐ Functionality for choosing period of time
   ☐ Functionality for choosing route
   ☐ Functionality for choosing offer
