@@ -26,10 +26,10 @@
             </div>
         </div>
 
-        <label for="arrival_date">Choose a ticket type</label>
+        <label for="ticket_type">Choose a ticket type</label>
         <div class="input-group mb-3">
             <select class="custom-select form-control" id="ticket_type" required>
-                <option selected>Choose...</option>
+                <option selected>Choose a ticket type</option>
                 <option value="1">Child</option>
                 <option value="2">Adult</option>
                 <option value="3">Senior</option>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <label for="arrival_date">Choose a departure station</label>
+        <label for="departure_station">Choose a departure station</label>
         <div class="input-group mb-3">
             <select class="custom-select form-control" id="departure_station" required>
                 <option selected>Choose...</option>
@@ -53,21 +53,21 @@
             </div>
         </div>
 
-        <label for="arrival_date">Choose a destination station</label>
+        <label for="destination">Choose a destination station</label>
         <div class="input-group mb-3">
             <select class="custom-select form-control" id="destination">
                 <option selected>Choose...</option>
                 {% for station in object_list %}
                 <option value="{{ station.pk }}">{{ station.station_name }}</option>
                 {% endfor %}
-
             </select>
             <div class="invalid-feedback">
                 Please choose a station.
             </div>
         </div>
+        <button class="btn btn-outline-info" type="submit">Buy ticket</button>
     </div>
-    <button class="btn btn-outline-info ml-3" type="submit">Buy ticket</button>
+   
 </form>
 <script type="text/javascript">
     $('.date-picker').datepicker({

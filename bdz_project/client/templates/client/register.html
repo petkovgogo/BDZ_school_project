@@ -1,54 +1,24 @@
 {% extends "client/base.html" %}
 {% block title %} Sign-up {% endblock %}
 {% block content %}
-<form action="{% url 'client:register' %}" method="POST">
+<form action="{% url 'client:signup' %}" method="POST">
   {% csrf_token %}
 
-  {% if message %}
-  <script
-    type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
-  {% endif %}
-
   <div class="form-group col-md-4 mb-3">
+    {% if message %}
+    <script
+      type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
+    {% endif %}
 
-    <label for="first_name">Enter your first name: </label>
+    {% for field in form %}
     <div>
-      <input type="text" id="first_name" name="first_name" required class="form-control"
-        placeholder="first name" aria-label="first_name" aria-describedby="basic-addon1">
+      {{ field.label_tag }}
+      <div class="mb-3">
+        {{ field }}
+      </div>
     </div>
-
-    <label for="last_name">Enter your last name: </label>
-    <div>
-      <input type="text" id="last_name" name="last_name" required class="form-control"
-        placeholder="Enter your last name" aria-label="last_name" aria-describedby="basic-addon1">
-    </div>
-
-    <div>
-      <input type="text" id="username" name="username" required class="form-control" placeholder="Enter an username"
-        aria-label="username" aria-describedby="basic-addon1">
-    </div>
-
-    <div>
-
-      <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your email"
-        aria-label="email" aria-describedby="basic-addon1">
-    </div>
-
-    <div>
-
-      <input type="password" id="password" name="password" required required class="form-control"
-        placeholder="Enter your password" aria-label="password" aria-describedby="basic-addon1">
-    </div>
-
-    <div>
-
-      <input type="password" id="conf_password" name="conf_password" required class="form-control"
-        placeholder="Confirm your password" aria-label="conf_password" aria-describedby="basic-addon1">
-    </div>
-  </div>
-  
-  <div>
-    <button class="btn btn-outline-info ml-3" type="submit">Submit</button>
+    {% endfor %}
+    <button class="btn btn-outline-info" type="submit">Submit</button>
   </div>
 </form>
 {% endblock %}
