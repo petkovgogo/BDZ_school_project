@@ -4,11 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.views import generic
 from django.views.generic.edit import FormView
 
 from .models import Station, Ticket
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, BuyTicketForm
 
 
 class LoginView(FormView):
@@ -24,8 +23,9 @@ class RegisterView(FormView):
 
 
 class BuyTicket(FormView):
-    model = Station
     template_name = 'client/product.html'
+    form_class = BuyTicketForm
+    success_url = '/buy/'
 
 
 def index(request):
@@ -65,4 +65,7 @@ def logout_view(request):
     return render(request, 'client/index.html')
 
 def buy_ticket(request):
-    return HttpResponseRedirect(reverse('client:index'))
+    form = BuyTicketForm(request.POST)
+    if form.is_valid():
+        return HttpResponseRedirect(reverse('client:index'))
+    return render(request, 'client/product.html', {'form': form})

@@ -16,7 +16,7 @@ class TicketType(models.Model):
     price = models.FloatField(default=0.0)
     
     def __str__(self):
-        return 'Ticket type: ' + self.ticket_type
+        return self.ticket_type
 
 class Ticket(models.Model):
     user_id = models.ForeignKey(User, default=None, on_delete=models.CASCADE)

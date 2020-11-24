@@ -32,6 +32,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
+        </li>
       </ul>
 
       {% if request.user.is_authenticated %}

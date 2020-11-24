@@ -1,4 +1,6 @@
+import datetime
 from django import forms
+from .models import Station, TicketType
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -20,6 +22,7 @@ class RegisterForm(forms.Form):
                                max_length=100, min_length=8, widget=forms.PasswordInput)
     conf_password = forms.CharField(label='Confirm your password',
                                     max_length=100, min_length=8, widget=forms.PasswordInput)
+
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
         r = User.objects.filter(username=username)
@@ -39,7 +42,7 @@ class RegisterForm(forms.Form):
         password2 = self.cleaned_data.get('conf_password')
 
         if password1 != password2:
-            raise forms.ValidationError("Password don't match")
+            raise forms.ValidationError("Passwords don't match")
 
         return password2
 
@@ -50,3 +53,39 @@ class RegisterForm(forms.Form):
             self.cleaned_data['password']
         )
         return user
+
+
+class BuyTicketForm(forms.Form):
+    departure_date = forms.DateField(label='Choose a departure date',
+                                     initial=datetime.date.today().strftime('%d.%m.%Y'),
+                                     input_formats=['%d.%m.%Y'],
+                                     widget=forms.DateInput(attrs={'class': 'date-picker'}))
+    arrival_date = forms.DateField(label='Choose an arrival date',
+                                   required=False,
+                                   input_formats=['%d.%m.%Y'],
+                                   widget=forms.DateInput(attrs={'placeholder': 'oneway', 'class': 'date-picker'}))
+    ticket_type = forms.ModelChoiceField(
+        label='Choose a ticket type', queryset=TicketType.objects.order_by('ticket_type').all())
+    departure_station = forms.ModelChoiceField(
+        label='Choose a departure station', queryset=Station.objects.order_by('station_name').all())
+    destination = forms.ModelChoiceField(
+        label='Choose a destination', queryset=Station.objects.order_by('station_name').all())
+
+    def clean_departure_date(self):
+        departure_date = str(self.cleaned_data.get('departure_date'))
+        curr_date = str(datetime.date.today())
+        if departure_date < curr_date:
+            raise forms.ValidationError("Departure date cannot be in the past")
+        return departure_date
+
+    def clean_arrival_date(self):
+        departure_date = self.cleaned_data.get('departure_date')
+        arrival_date = self.cleaned_data.get('arrival_date')
+
+        if arrival_date is None:
+            return departure_date
+
+        if str(departure_date) <= str(arrival_date):
+            raise forms.ValidationError(
+                "Arrival date cannot be before departure date")
+        return departure_date

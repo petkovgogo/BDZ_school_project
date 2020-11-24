@@ -1,71 +1,31 @@
 {% extends "client/base.html" %}
 {% block title %} Buy ticket {% endblock %}
 {% block content %}
+{% load static %}
+
 <form class="needs-validation" novalidate action="{% url 'client:buy' %}" method="POST">
     {% csrf_token %}
 
     <div class="form-group col-md-4 mb-3">
-        <label for="arrival_date">Choose a departure date</label>
-        <div class="input-group date mb-3" id="departure_date" data-target-input="nearest">
-            <input type="text" class="form-control date-picker" placeholder="departure date"
-                data-target="#departure_date" required />
-            <div class="input-group-append" data-target="#departure_date" data-toggle="datepicker">
-                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-            </div>
+        {% if form.errors %}
+        {% for field in form %}
+        {% for error in field.errors %}
 
-            <div class="invalid-feedback">
-                Please choose a date.
-            </div>
-        </div>
-
-        <label for="arrival_date">Choose an arrival date </label>
-        <div class="input-group date mb-3" id="arrival_date" data-target-input="nearest">
-            <input type="text" class="form-control date-picker" placeholder="oneway" data-target="#arrival_date" />
-            <div class="input-group-append" data-target="#arrival_date" data-toggle="datepicker">
-                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+        <script type=text/javascript>toastr["error"]("{{ error }}", "Invalid choice" ); </script> 
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+        
+        {% for field in form %} 
+        <div>
+            {{ field.label_tag }}
+            <div class="mb-3">
+                {{ field }}
             </div>
         </div>
-
-        <label for="ticket_type">Choose a ticket type</label>
-        <div class="input-group mb-3">
-            <select class="custom-select form-control" id="ticket_type" required>
-                <option selected>Choose a ticket type</option>
-                <option value="1">Child</option>
-                <option value="2">Adult</option>
-                <option value="3">Senior</option>
-            </select>
-            <div class="invalid-feedback">
-                Please choose a ticket type.
-            </div>
-        </div>
-
-        <label for="departure_station">Choose a departure station</label>
-        <div class="input-group mb-3">
-            <select class="custom-select form-control" id="departure_station" required>
-                <option selected>Choose...</option>
-                {% for station in object_list %}
-                <option value="{{ station.pk }}">{{ station.station_name }}</option>
-                {% endfor %}
-
-            </select>
-            <div class="invalid-feedback">
-                Please choose a station.
-            </div>
-        </div>
-
-        <label for="destination">Choose a destination station</label>
-        <div class="input-group mb-3">
-            <select class="custom-select form-control" id="destination">
-                <option selected>Choose...</option>
-                {% for station in object_list %}
-                <option value="{{ station.pk }}">{{ station.station_name }}</option>
-                {% endfor %}
-            </select>
-            <div class="invalid-feedback">
-                Please choose a station.
-            </div>
-        </div>
-        <button class="btn btn-outline-info" type="submit">Buy ticket</button>
+        {% endfor %}
+        
+        <button class="btn btn-outline-info" type="submit">Next</button>
     </div>
    
 </form>
@@ -73,7 +33,7 @@
     $('.date-picker').datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'dd.mm.yyyy',
+        dateFormat: 'dd.mm.yy',
     });
 </script>
 {% endblock %}
