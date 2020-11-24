@@ -2,4 +2,28 @@
     background: #ede7e6;
     border: 1px solid #555;
     color: #000000;
- }
+}
+
+.carousel-item{
+    height: 40rem;
+    background: #777;
+    color:#eca089;
+    position: relative; 
+    background-position: center;
+    background-size: cover;
+}
+
+.container{
+    position: absolute;
+    bottom: 0;
+    left: 5;
+    right: 0;
+    padding-bottom: 50px;
+}
+
+.container2 {
+   margin-top: 4%;    
+}
+.rowjustify-content-center{
+    margin-right: 5%;
+}
