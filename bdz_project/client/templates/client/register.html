@@ -9,70 +9,46 @@
     type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
   {% endif %}
 
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
+  <div class="form-group col-md-4 mb-3">
 
-        <input type="text" id="first_name" name="first_name" required class="form-control"
-          placeholder="Enter your first name" aria-label="first_name" aria-describedby="basic-addon1">
-      </div>
+    <label for="first_name">Enter your first name: </label>
+    <div>
+      <input type="text" id="first_name" name="first_name" required class="form-control"
+        placeholder="first name" aria-label="first_name" aria-describedby="basic-addon1">
+    </div>
+
+    <label for="last_name">Enter your last name: </label>
+    <div>
+      <input type="text" id="last_name" name="last_name" required class="form-control"
+        placeholder="Enter your last name" aria-label="last_name" aria-describedby="basic-addon1">
+    </div>
+
+    <div>
+      <input type="text" id="username" name="username" required class="form-control" placeholder="Enter an username"
+        aria-label="username" aria-describedby="basic-addon1">
+    </div>
+
+    <div>
+
+      <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your email"
+        aria-label="email" aria-describedby="basic-addon1">
+    </div>
+
+    <div>
+
+      <input type="password" id="password" name="password" required required class="form-control"
+        placeholder="Enter your password" aria-label="password" aria-describedby="basic-addon1">
+    </div>
+
+    <div>
+
+      <input type="password" id="conf_password" name="conf_password" required class="form-control"
+        placeholder="Confirm your password" aria-label="conf_password" aria-describedby="basic-addon1">
     </div>
   </div>
-
-
+  
   <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-
-        <input type="text" id="last_name" name="last_name" required class="form-control"
-          placeholder="Enter your last name" aria-label="last_name" aria-describedby="basic-addon1">
-      </div>
-    </div>
+    <button class="btn btn-outline-info ml-3" type="submit">Submit</button>
   </div>
-
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-
-        <input type="text" id="username" name="username" required class="form-control" placeholder="Enter an username"
-          aria-label="username" aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-
-        <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your email"
-          aria-label="email" aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-
-        <input type="password" id="password" name="password" required required class="form-control"
-          placeholder="Enter your password" aria-label="password" aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-
-        <input type="password" id="conf_password" name="conf_password" required class="form-control"
-          placeholder="Confirm your password" aria-label="conf_password" aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Submit</button>
-  </div>
-
 </form>
 {% endblock %}

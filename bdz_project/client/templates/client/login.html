@@ -10,20 +10,19 @@
     type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
   {% endif %}
 
-  <div>
+  <div class="form-group col-md-4 mb-3">
     <label for="email">Enter your email: </label>
-    <input type="email" id="email" name="email" required>
-  </div>
+    <div class="mb-3">
+      <input type="email" id="email" name="email" required>
+    </div>
 
-  <div>
     <label for="password">Enter your password: </label>
-    <input type="password" id="password" name="password" required>
+    <div>
+      <input type="password" id="password" name="password" required>
+    </div>
   </div>
-
-
-  <div>
+  <div class="ml-3">
     <input type="submit" value="Submit">
   </div>
-
 </form>
 {% endblock %}
