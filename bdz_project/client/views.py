@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.views import generic
+from .models import Station, Ticket
 
 def login_user(request):
     return render(request, 'client/login.html', {})
@@ -45,3 +47,11 @@ def register_user(request):
         return HttpResponseRedirect(reverse('client:index'))
     else:
         return HttpResponseRedirect(reverse('client:register'))
+
+class BuyTicket(generic.ListView):
+    model = Station
+    template_name = 'client/product.html'
+    context_object_name = 'stations'
+
+def buy_ticket(request):
+    return HttpResponseRedirect(reverse('client:index'))

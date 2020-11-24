@@ -1,44 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-{% load static %}
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" media="all">
-</head>
-
-<body>
+{% extends "client/base.html" %}
+{% block title %} Login {% endblock %}
+{% block content %}
 <h1>{{ message }}</h1>
-  <form action="{% url 'client:auth' %}" method="POST">
-    {% csrf_token %}
+<form action="{% url 'client:auth' %}" method="POST">
+  {% csrf_token %}
 
-    {% if message %}
-    <script
-      type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
-    {% endif %}
-    
-    <div>
-      <label for="email">Enter your email: </label>
-      <input type="email" id="email" name="email" required>
-    </div>
+  {% if message %}
+  <script
+    type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Incorrect data")</script>
+  {% endif %}
 
-    <div>
-      <label for="password">Enter your password: </label>
-      <input type="password" id="password" name="password" required>
-    </div>
+  <div>
+    <label for="email">Enter your email: </label>
+    <input type="email" id="email" name="email" required>
+  </div>
+
+  <div>
+    <label for="password">Enter your password: </label>
+    <input type="password" id="password" name="password" required>
+  </div>
 
 
-    <div>
-      <input type="submit" value="Submit">
-    </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
 
-  </form>
-
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-</body>
-
-</html>
+</form>
+{% endblock %}
