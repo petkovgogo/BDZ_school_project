@@ -55,26 +55,31 @@ class RegisterForm(forms.Form):
         return user
 
 
-class BuyTicketForm(forms.Form):
+class RouteForm(forms.Form):
     departure_date = forms.DateField(label='Choose a departure date',
                                      initial=datetime.date.today().strftime('%d.%m.%Y'),
                                      input_formats=['%d.%m.%Y'],
-                                     widget=forms.DateInput(attrs={'class': 'date-picker'}))
+                                     widget=forms.DateInput(attrs={'class': 'date-picker'}),
+                                     required=False)
     arrival_date = forms.DateField(label='Choose an arrival date',
                                    required=False,
                                    input_formats=['%d.%m.%Y'],
-                                   widget=forms.DateInput(attrs={'placeholder': 'oneway', 'class': 'date-picker'}))
-    ticket_type = forms.ModelChoiceField(
-        label='Choose a ticket type', queryset=TicketType.objects.order_by('ticket_type').all())
+                                   widget=forms.DateInput(attrs={'placeholder': 'oneway', 'class': 'date-picker'}),)
     departure_station = forms.ModelChoiceField(
-        label='Choose a departure station', queryset=Station.objects.order_by('station_name').all())
+        label='Choose a departure station', queryset=Station.objects.order_by('station_name').all(),
+        required=False)
     destination = forms.ModelChoiceField(
-        label='Choose a destination', queryset=Station.objects.order_by('station_name').all())
+        label='Choose a destination', queryset=Station.objects.order_by('station_name').all(),
+        required=False)
+    departure_time = forms.TimeField(label='Departure after', widget=forms.TimeInput(format='%H:%M', attrs={'class': 'time-picker'}),
+    required=False)
 
     def clean_departure_date(self):
-        departure_date = str(self.cleaned_data.get('departure_date'))
+        departure_date = self.cleaned_data.get('departure_date')
+        if departure_date is None:
+            raise forms.ValidationError("You must pick a departure date")
         curr_date = str(datetime.date.today())
-        if departure_date < curr_date:
+        if str(departure_date) < curr_date:
             raise forms.ValidationError("Departure date cannot be in the past")
         return departure_date
 
@@ -89,3 +94,21 @@ class BuyTicketForm(forms.Form):
             raise forms.ValidationError(
                 "Arrival date cannot be before departure date")
         return departure_date
+    
+    def clean_departure_station(self):
+        departure_station = self.cleaned_data.get('departure_station')
+        if departure_station is None:
+            raise forms.ValidationError("You must pick a departure station")
+        return departure_station
+    
+    def clean_destination(self):
+        destination = self.cleaned_data.get('destination')
+        if destination is None:
+            raise forms.ValidationError("You must pick a destination")
+        return destination
+
+    def clean_departure_time(self):
+        departure_time = self.cleaned_data.get('departure_time')
+        if departure_time is None:
+            raise forms.ValidationError("You must pick a departure time")
+        return departure_time

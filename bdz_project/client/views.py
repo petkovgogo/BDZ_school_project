@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import FormView
 
 from .models import Station, Ticket
-from .forms import LoginForm, RegisterForm, BuyTicketForm
+from .forms import LoginForm, RegisterForm, RouteForm
 
 
 class LoginView(FormView):
@@ -24,9 +24,8 @@ class RegisterView(FormView):
 
 class BuyTicket(FormView):
     template_name = 'client/product.html'
-    form_class = BuyTicketForm
+    form_class = RouteForm
     success_url = '/buy/'
-
 
 def index(request):
     return render(request, 'client/index.html')
@@ -65,7 +64,7 @@ def logout_view(request):
     return render(request, 'client/index.html')
 
 def buy_ticket(request):
-    form = BuyTicketForm(request.POST)
+    form = RouteForm(request.POST)
     if form.is_valid():
         return HttpResponseRedirect(reverse('client:index'))
     return render(request, 'client/product.html', {'form': form})

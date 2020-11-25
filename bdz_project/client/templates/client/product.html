@@ -35,5 +35,16 @@
         autoclose: true,
         dateFormat: 'dd.mm.yy',
     });
+    
+    $('.time-picker').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 60,
+        minTime: '8',
+        maxTime: '20:00',
+        startTime: '8:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: false
+    });
 </script>
 {% endblock %}
