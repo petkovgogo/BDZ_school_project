@@ -7,7 +7,10 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
   media="all">
+<<<<<<< HEAD
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+=======
+>>>>>>> feature/design
 <link rel="stylesheet" href="{% static 'client/css/all.css' %}">
 <link rel="stylesheet" href="{% static 'client/css/styles.css' %}">
 
@@ -30,6 +33,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Image and text -->
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <div class="inner2">
+            <img src="{% static 'client/images/logobdz2.png' %}" class="d-inline-block align-top">
+          </div>
+        </a>
+      </nav>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
@@ -48,10 +59,10 @@
       </div>
       {% else %}
       <div class="form-inline my-2 my-lg-0 mr-sm-3">
-        <a href="{% url 'client:register' %}" class="btn btn-outline-info my-2 my-sm-0" type="Sign up">Sign up</a>
+        <a href="{% url 'client:register' %}" class="btn btn-danger my-2 my-sm-0" type="Sign up">Sign up</a>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <a href="{% url 'client:login' %}" class="btn btn-outline-info my-2 my-sm-0" type="Sign in">Sign in</a>
+        <a href="{% url 'client:login' %}" class="btn btn-danger my-2 my-sm-0" type="Sign in">Sign in</a>
       </div>
       {% endif %}
     </div>
