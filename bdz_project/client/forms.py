@@ -1,6 +1,6 @@
 import datetime
 from django import forms
-from django.contrib.auth.models import User
+from django.conf import settings
 from .models import Station
 
 
@@ -61,7 +61,7 @@ class RegisterForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
-        username = User.objects.filter(username=username)
+        username = settings.AUTH_USER_MODEL.objects.filter(username=username)
 
         if username.count():
             raise forms.ValidationError("Username already exists")
@@ -70,7 +70,7 @@ class RegisterForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
-        password = User.objects.filter(email=email)
+        password = settings.AUTH_USER_MODEL.objects.filter(email=email)
 
         if password.count():
             raise forms.ValidationError("Email already exists")
@@ -87,7 +87,7 @@ class RegisterForm(forms.Form):
         return password2
 
     def save(self):
-        user = User.objects.create_user(
+        user = settings.AUTH_USER_MODEL.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['email'],
             self.cleaned_data['password']

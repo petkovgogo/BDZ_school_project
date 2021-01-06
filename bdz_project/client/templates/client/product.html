@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<form class="needs-validation" novalidate action="{% url 'client:buy' %}" method="POST">
+<form class="needs-validation" action="{% url 'client:buy' %}" method="POST">
     {% csrf_token %}
 
     <div class="form-group col-md-4 mb-3">
