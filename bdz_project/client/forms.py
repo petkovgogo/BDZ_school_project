@@ -1,8 +1,9 @@
 import datetime
 from django import forms
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from .models import Station
 
+User = get_user_model()
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -60,8 +61,8 @@ class RegisterForm(forms.Form):
     )
 
     def clean_username(self):
-        username = self.cleaned_data['username'].lower()
-        username = settings.AUTH_USER_MODEL.objects.filter(username=username)
+        username = self.cleaned_data.get('username')
+        username = User.objects.filter(username=username)
 
         if username.count():
             raise forms.ValidationError("Username already exists")
@@ -69,8 +70,8 @@ class RegisterForm(forms.Form):
         return username
 
     def clean_email(self):
-        email = self.cleaned_data['email'].lower()
-        password = settings.AUTH_USER_MODEL.objects.filter(email=email)
+        email = self.cleaned_data.get('email')
+        password = User.objects.filter(email=email)
 
         if password.count():
             raise forms.ValidationError("Email already exists")
@@ -87,7 +88,7 @@ class RegisterForm(forms.Form):
         return password2
 
     def save(self):
-        user = settings.AUTH_USER_MODEL.objects.create_user(
+        user = User.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['email'],
             self.cleaned_data['password']
@@ -137,9 +138,9 @@ class RouteForm(forms.Form):
         if departure_date is None:
             raise forms.ValidationError("You must pick a departure date")
 
-        curr_date = str(datetime.date.today())
+        curr_date = datetime.date.today()
 
-        if str(departure_date) < curr_date:
+        if departure_date < curr_date:
             raise forms.ValidationError("Departure date cannot be in the past")
 
         return departure_date
@@ -151,7 +152,7 @@ class RouteForm(forms.Form):
         if arrival_date is None:
             return departure_date
 
-        if str(departure_date) <= str(arrival_date):
+        if departure_date >= arrival_date:
             raise forms.ValidationError(
                 "Arrival date cannot be before departure date")
 

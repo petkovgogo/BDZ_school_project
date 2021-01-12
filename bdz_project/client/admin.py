@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TicketType, Station, Discount, Ticket, Route
+from .models import TicketType, Station, Discount
 
 admin.site.register(TicketType)
 admin.site.register(Station)
