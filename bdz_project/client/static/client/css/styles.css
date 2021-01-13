@@ -1,3 +1,6 @@
+body {
+    background-color: #555;
+  }
 .ui-datepicker {
     background: #ede7e6;
     border: 1px solid #555;
@@ -12,6 +15,16 @@
     background-position: center;
     background-size: cover;
 }
+.carousel .item {
+    height: 300px;
+  }
+  
+  .item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 300px;
+  }
 
 .container{
     position: absolute;
@@ -42,7 +55,7 @@
 }
 
 .navbar-brand{
-    width: 100px;
+    width: 100px; 
     height: 50px;
 }
 
@@ -58,7 +71,28 @@
     transform: scale(1.5);
 }
 
-.card-block{
+#ticket-link img {
+    cursor: pointer;
+}
+  #ticket-link .gif-file {
+    display:none;
+  }
+
+  .card-block{
   float: none;
   display: inline-block;
+}
+.carousel {
+    height: 65rem;
+  }
+
+.carousel-item,
+.carousel-inner,
+.carousel-inner img {
+  height: 100%;
+  width: 100;
+}
+
+.carousel-item {
+  text-align: center;
 }

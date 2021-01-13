@@ -28,7 +28,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Image and text -->
       <nav class="navbar navbar-dark bg-dark">
@@ -37,13 +37,23 @@
             <img src="{% static 'client/images/logobdz2.png' %}" class="d-inline-block align-top">
           </div>
         </a>
+        
+          
+        </a>
       </nav>
+      
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
+        <div class="inner3">
+          <div id="ticket-link">
+            <img src="{% static 'client/images/Buy a ticket button anim3.png' %}" alt="gif preset" class="preset-file">
+            <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
+          </div>
+        </div>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
+          <a id="ticket-link" class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
         </li>
       </ul>
 
@@ -67,5 +77,12 @@
   {% block content %}
   {% endblock %}
 </body>
+
+<script>
+$("img", "#ticket-link").hover(function() {
+  $('.preset-file').toggle();
+  $('.gif-file').toggle();
+});
+</script>
 
 </html>
