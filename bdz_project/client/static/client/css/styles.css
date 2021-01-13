@@ -1,7 +1,19 @@
-html {
-    background-color: gray;
+body {
+    background-color: #555;
 }
-  
+
+.gif-file {
+    display: none;
+}
+
+.nav-item-size {
+    height: 50px;
+}
+
+#brand {
+    z-index: 10;
+}
+
 .ui-datepicker {
     background: #ede7e6;
     border: 1px solid #555;
@@ -20,12 +32,12 @@ html {
     height: 300px;
   }
   
-  .item img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-height: 300px;
-  }
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
 
 .container{
     position: absolute;

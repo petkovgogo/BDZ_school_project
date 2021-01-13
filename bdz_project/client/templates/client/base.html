@@ -31,29 +31,21 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Image and text -->
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-          <div class="inner2">
-            <img src="{% static 'client/images/logobdz2.png' %}" class="d-inline-block align-top">
-          </div>
-        </a>
-        
-          
-        </a>
-      </nav>
+      <a id="brand" class="nav-item" href="{% url 'client:index' %}">
+        <div class="inner2">
+          <img src="{% static 'client/images/logobdz2.png' %}" class="d-inline-block align-top">
+        </div>
+      </a>
       
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
-        <div class="inner3">
-          <div id="ticket-link">
-            <img src="{% static 'client/images/Buy a ticket button anim3.png' %}" alt="gif preset" class="preset-file">
-            <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
-          </div>
-        </div>
         <li class="nav-item">
           <a id="ticket-link" class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
+        </li>
+        <li class="nav-item">
+          <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
         </li>
       </ul>
 
@@ -79,8 +71,7 @@
 </body>
 
 <script>
-$("img", "#ticket-link").hover(function() {
-  $('.preset-file').toggle();
+$("#ticket-link").hover(function() {
   $('.gif-file').toggle();
 });
 </script>
