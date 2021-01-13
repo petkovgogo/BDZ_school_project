@@ -112,4 +112,4 @@ def change_credentials(request):
 
 
 def change_successful(request):
-    return HttpResponseRedirect(reverse('client:index'))
+    render(request, 'client/changeSuccessful.html')

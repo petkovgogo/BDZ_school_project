@@ -62,7 +62,7 @@
         <a href="{% url 'client:change-credentials' %}" class="nav-link" type="Sign up">Wellcome, {{ request.user.username }}!</a>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <a href="{% url 'client:logout' %}" class="btn btn-outline-info my-2 my-sm-0" type="Log out">Log out</a>
+        <a href="{% url 'client:logout' %}" class="btn btn-danger my-2 my-sm-0" type="Log out">Log out</a>
       </div>
       {% else %}
       <div class="form-inline my-2 my-lg-0 mr-sm-3">

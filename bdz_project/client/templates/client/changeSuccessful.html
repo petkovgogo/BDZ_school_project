@@ -2,3 +2,10 @@
 {% block title %} Login {% endblock %}
 {% block content %}
 {% load static %}
+
+<div class="text-center h-50">
+    <p>Successfuly changed credentials</p>
+    <a href="{% url 'client:index' %}" class="btn btn-danger my-2 my-sm-0">Reurn home</a>
+</div>
+
+{% endblock %}
