@@ -38,12 +38,7 @@
           </div>
         </a>
         
-          <div class="inner3">
-            <div id="gifs-rows">
-              <img src="{% static 'client/images/Buy a ticket button anim3.png' %}" alt="gif preset" class="preset-file">
-              <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
           
-          </div>
         </a>
       </nav>
       
@@ -51,8 +46,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
+        <div class="inner3">
+          <div id="ticket-link">
+            <img src="{% static 'client/images/Buy a ticket button anim3.png' %}" alt="gif preset" class="preset-file">
+            <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
+          </div>
+        </div>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
+          <a id="ticket-link" class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
         </li>
       </ul>
 
@@ -78,7 +79,7 @@
 </body>
 
 <script>
-$("img", "#gifs-rows").hover(function() {
+$("img", "#ticket-link").hover(function() {
   $('.preset-file').toggle();
   $('.gif-file').toggle();
 });

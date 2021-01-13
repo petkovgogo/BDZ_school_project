@@ -1,7 +1,6 @@
-html {
-    background-color: gray;
-}
-
+body {
+    background-color: #555;
+  }
 .ui-datepicker {
     background: #ede7e6;
     border: 1px solid #555;
@@ -72,14 +71,28 @@ html {
     transform: scale(1.5);
 }
 
-#gifs-rows img {
+#ticket-link img {
     cursor: pointer;
 }
-  #gifs-rows .gif-file {
+  #ticket-link .gif-file {
     display:none;
   }
 
   .card-block{
   float: none;
   display: inline-block;
+}
+.carousel {
+    height: 65rem;
+  }
+
+.carousel-item,
+.carousel-inner,
+.carousel-inner img {
+  height: 100%;
+  width: 100;
+}
+
+.carousel-item {
+  text-align: center;
 }
