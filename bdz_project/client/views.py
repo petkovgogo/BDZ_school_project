@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import FormView
-from .forms import LoginForm, RegisterForm, RouteForm
+from .forms import LoginForm, RegisterForm, RouteForm, ChangeCredentialsForm
 
 
 class LoginView(FormView):
@@ -18,10 +18,23 @@ class RegisterView(FormView):
     success_url = '/signup/'
 
 
-class BuyTicket(FormView):
+class BuyTicketView(FormView):
     template_name = 'client/product.html'
     form_class = RouteForm
     success_url = '/buy/'
+
+
+class ChangeCredsView(FormView):
+    template_name = 'client/changeCredentials.html'
+    form_class = ChangeCredentialsForm
+    success_url = '/change/'
+
+    def get_form_kwargs(self):
+        kwargs = super(ChangeCredsView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+
+        return kwargs
+
 
 def index(request):
     return render(request, 'client/index.html')
@@ -31,6 +44,7 @@ def authenticate_user(request):
     form = LoginForm(request.POST)
 
     if form.is_valid():
+        form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=raw_password)
@@ -39,10 +53,9 @@ def authenticate_user(request):
             login(request, user)
 
             return HttpResponseRedirect(reverse('client:index'))
-            
-        else:
-            form.add_error('username', 'Invalid credentials')
-            form.add_error('password', 'Invalid credentials')
+
+        form.add_error('username', 'Invalid credentials')
+        form.add_error('password', 'Invalid credentials')
 
     return render(request, 'client/login.html', {'form': form})
 
@@ -52,7 +65,6 @@ def signup(request):
         form = RegisterForm(request.POST)
 
         if form.is_valid():
-            form.clean_username()
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
@@ -63,10 +75,12 @@ def signup(request):
 
     return render(request, 'client/register.html', {'form': form})
 
+
 def logout_view(request):
     logout(request)
 
     return render(request, 'client/index.html')
+
 
 def buy_ticket(request):
     form = RouteForm(request.POST)
@@ -75,3 +89,27 @@ def buy_ticket(request):
         return HttpResponseRedirect(reverse('client:index'))
 
     return render(request, 'client/product.html', {'form': form})
+
+
+def change_credentials(request):
+    form = ChangeCredentialsForm(request.POST, request=request)
+
+    if form.is_valid():
+        if form.cleaned_data.get('username') != "":
+            request.user.username = form.cleaned_data.get('username')
+
+        if form.cleaned_data.get('email') != "":
+            request.user.email = form.cleaned_data.get('email')
+
+        if form.cleaned_data.get('new_password') != "":
+            request.user.set_password(form.cleaned_data.get('new_password'))
+
+        request.user.save()
+
+        return HttpResponseRedirect(reverse('client:change-successful'))
+
+    return render(request, 'client/changeCredentials.html', {'form': form})
+
+
+def change_successful(request):
+    return HttpResponseRedirect(reverse('client:index'))

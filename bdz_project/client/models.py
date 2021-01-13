@@ -3,9 +3,46 @@ from django.utils import timezone
 from django.conf import settings
 
 
-class Schedule(models.Model):
+class Train(models.Model):
     train_number = models.IntegerField(default=0)
+    train_type = models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.train_type + ' ' + self.train_number
+
+
+class Station(models.Model):
     station_name = models.CharField(max_length=20)
+    location = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.station_name
+
+class Schedule(models.Model):
+    train_id = models.ForeignKey(
+        Train,
+        default=None,
+        on_delete=models.CASCADE
+    )
+
+    weeek_days = models.PositiveSmallIntegerField(default=127)
+    valid_from = models.DateField('valid from', default=None)
+    valid_till = models.DateField('valid till', default=None)
+
+
+class TrainStop(models.Model):
+    schedule_id = models.ForeignKey(
+        Schedule,
+        default=None,
+        on_delete=models.CASCADE
+    )
+
+    station_id = models.ForeignKey(
+        Station,
+        default=None,
+        on_delete=models.CASCADE
+    )
+
     departure_time = models.TimeField(
         'departure time',
         default=None,
@@ -20,20 +57,12 @@ class Schedule(models.Model):
 
     def __str__(self):
         if self.departure_time is None:
-            return str(self.station_name) + "\n-> Arrival:  " + str(self.arrival_time)
+            return str(self.station_id.station_name) + "\n-> Arrival: " + str(self.arrival_time)
 
         elif self.arrival_time is None:
-            return str(self.station_name) + "\n-> Departure:  " + str(self.departure_time)
+            return str(self.station_id.station_name) + "\n-> Departure: " + str(self.departure_time)
 
-        return str(self.station_name) + "\n-> Departure:  " + str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time)
-
-
-class Station(models.Model):
-    station_name = models.CharField(max_length=20)
-    location = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.station_name
+        return str(self.station_id.station_name) + "\n-> Departure: " + str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time)
 
 
 class TicketType(models.Model):
@@ -49,7 +78,6 @@ class Ticket(models.Model):
         settings.AUTH_USER_MODEL, default=None, on_delete=models.CASCADE)
     ticket_type_id = models.ForeignKey(
         TicketType,
-        related_name='ticket_type_id',
         default=None,
         on_delete=models.CASCADE
     )
@@ -63,14 +91,14 @@ class Ticket(models.Model):
 class Route(models.Model):
     starting_station_id = models.ForeignKey(
         Station,
-        related_name='starting_station_id',
+        related_name='start_station',
         default=None,
         on_delete=models.CASCADE
     )
 
     end_station_id = models.ForeignKey(
         Station,
-        related_name='end_station_id',
+        related_name='end_station',
         default=None,
         on_delete=models.CASCADE
     )
@@ -78,10 +106,14 @@ class Route(models.Model):
     departure_date = models.DateTimeField('departure date', default=None)
     arrival_date = models.DateTimeField('arrival date', default=None)
     duration = models.FloatField(default=0.0)
-    train_number = models.IntegerField(default=0)
+    train_id = models.ForeignKey(
+        Train,
+        default=None,
+        on_delete=models.CASCADE
+    )
+
     ticket_id = models.ForeignKey(
         Ticket,
-        related_name='ticket_id',
         default=None,
         on_delete=models.CASCADE
     )
@@ -91,8 +123,15 @@ class Route(models.Model):
 
 
 class Discount(models.Model):
-    ticket_type = models.CharField(max_length=20)
+    ticket_type_id = models.ForeignKey(
+        TicketType,
+        default=None,
+        on_delete=models.CASCADE
+    )
     discount = models.FloatField(default=0.0)
 
     def __str__(self):
-        return self.ticket_type + ' ticket\' s price = -' + (self.discount * 100) + '%'
+        return self.ticket_type_id.ticket_type + ' ticket\' s price = -' + (self.discount * 100) + '%'
+
+
+
