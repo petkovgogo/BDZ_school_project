@@ -4,11 +4,11 @@ from django.conf import settings
 
 
 class Train(models.Model):
-    train_number = models.IntegerField(default=0)
-    train_type = models.CharField(max_length=5)
+    train_number = models.PositiveSmallIntegerField(default=0)
+    train_type = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.train_type + ' ' + self.train_number
+        return self.train_type + ' ' + str(self.train_number)
 
 
 class Station(models.Model):
@@ -18,6 +18,7 @@ class Station(models.Model):
     def __str__(self):
         return self.station_name
 
+
 class Schedule(models.Model):
     train_id = models.ForeignKey(
         Train,
@@ -25,9 +26,9 @@ class Schedule(models.Model):
         on_delete=models.CASCADE
     )
 
-    weeek_days = models.PositiveSmallIntegerField(default=127)
+    week_days = models.PositiveSmallIntegerField(default=127)
     valid_from = models.DateField('valid from', default=None)
-    valid_till = models.DateField('valid till', default=None)
+    valid_untill = models.DateField('valid untill', default=None)
 
 
 class TrainStop(models.Model):
@@ -132,6 +133,3 @@ class Discount(models.Model):
 
     def __str__(self):
         return self.ticket_type_id.ticket_type + ' ticket\' s price = -' + (self.discount * 100) + '%'
-
-
-

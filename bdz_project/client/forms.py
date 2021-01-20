@@ -10,14 +10,16 @@ User = get_user_model()
 class LoginForm(forms.Form):
     username = forms.CharField(
         label='Enter your username',
-        max_length=100,
+        max_length=30,
+        required=False,
         widget=forms.TextInput(attrs={'autocomplete': 'off'})
     )
 
     password = forms.CharField(
         label='Enter your password',
-        max_length=100,
+        max_length=30,
         min_length=8,
+        required=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'})
     )
 
@@ -40,12 +42,14 @@ class RegisterForm(forms.Form):
     username = forms.CharField(
         label='Enter your username',
         max_length=20,
+        required=False,
         widget=forms.TextInput(attrs={'autocomplete': 'off'})
     )
 
     email = forms.EmailField(
         label='Enter your email',
         max_length=100,
+        required=False,
         widget=forms.TextInput(attrs={'autocomplete': 'off'})
     )
 
@@ -53,6 +57,7 @@ class RegisterForm(forms.Form):
         label='Enter your password',
         max_length=30,
         min_length=8,
+        required=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'})
     )
 
@@ -60,6 +65,7 @@ class RegisterForm(forms.Form):
         label='Confirm your password',
         max_length=30,
         min_length=8,
+        required=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'})
     )
 
@@ -105,7 +111,8 @@ class RouteForm(forms.Form):
         label='Choose a departure date',
         initial=datetime.date.today().strftime('%d.%m.%Y'),
         input_formats=['%d.%m.%Y'],
-        widget=forms.DateInput(attrs={'class': 'date-picker'}),
+        widget=forms.DateInput(
+            attrs={'class': 'date-picker', 'autocomplete': 'off'}),
         required=False
     )
 
@@ -114,7 +121,7 @@ class RouteForm(forms.Form):
         required=False,
         input_formats=['%d.%m.%Y'],
         widget=forms.DateInput(
-            attrs={'placeholder': 'oneway', 'class': 'date-picker'})
+            attrs={'placeholder': 'oneway', 'class': 'date-picker', 'autocomplete': 'off'})
     )
 
     departure_station = forms.ModelChoiceField(
@@ -131,7 +138,8 @@ class RouteForm(forms.Form):
 
     departure_time = forms.TimeField(
         label='Departure after',
-        widget=forms.TimeInput(format='%H:%M', attrs={'class': 'time-picker'}),
+        widget=forms.TimeInput(format='%H:%M',
+                               attrs={'class': 'time-picker', 'autocomplete': 'off'}),
         required=False
     )
 

@@ -110,4 +110,4 @@ def change_credentials(request):
 
 
 def change_successful(request):
-    render(request, 'client/changeSuccessful.html')
+    return render(request, 'client/changeSuccessful.html')

@@ -2,6 +2,10 @@ body {
     background-color: #555;
 }
 
+label {
+    color: #f2f2f2;
+}
+
 .gif-file {
     display: none;
 }
