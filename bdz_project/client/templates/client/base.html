@@ -37,7 +37,7 @@
         </div>
       </a>
       
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ml-4 mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'client:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -45,7 +45,7 @@
           <a id="ticket-link" class="nav-link" href="{% url 'client:buyticket' %}">Buy a ticket</a>
         </li>
         <li class="nav-item">
-          <img src="{% static 'client/images/Buy a ticket button anim4.gif' %}" alt="gif preset" class="gif-file">
+          <img src="{% static 'client/images/Buy_a_ticket_button_anim_final.gif' %}" alt="gif preset" class="gif-file">
         </li>
       </ul>
 
@@ -75,5 +75,27 @@
   $('.gif-file').toggle();
 });
 </script>
+
+<script type=text/javascript>
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+  toastr["info"]("Този сайт използва куки");
+</script> 
 
 </html>

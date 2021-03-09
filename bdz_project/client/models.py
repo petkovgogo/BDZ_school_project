@@ -28,7 +28,7 @@ class Schedule(models.Model):
 
     week_days = models.PositiveSmallIntegerField(default=127)
     valid_from = models.DateField('valid from', default=None)
-    valid_untill = models.DateField('valid untill', default=None)
+    valid_until = models.DateField('valid until', default=None)
 
 
 class TrainStop(models.Model):
@@ -60,10 +60,11 @@ class TrainStop(models.Model):
         if self.departure_time is None:
             return str(self.station_id.station_name) + "\n-> Arrival: " + str(self.arrival_time)
 
-        elif self.arrival_time is None:
+        if self.arrival_time is None:
             return str(self.station_id.station_name) + "\n-> Departure: " + str(self.departure_time)
 
-        return str(self.station_id.station_name) + "\n-> Departure: " + str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time)
+        return (str(self.station_id.station_name) + "\n-> Departure: " +
+        str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time))
 
 
 class TicketType(models.Model):

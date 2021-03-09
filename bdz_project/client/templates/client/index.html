@@ -11,13 +11,9 @@
   </ol>
 
   <div class="carousel-inner">
-
-    <div class="carousel-item active">
+    <div id="citem1" class="carousel-item active" data-interval="2000">
       <img class="d-block w-100" src="{% static 'client/images/test2.jpg' %}">
-      <div class="container">
-
-
-      </div>
+      <div class="container"></div>
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="{% static 'client/images/test.jpg' %}">
@@ -91,43 +87,45 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
   <div class="col">
     <div class="card">
-      <div class="card shadow">
-      <div class="inner">
-      <img src="{% static 'client/images/cardimage1.jpg' %}" class="card-img-top" alt="...">
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Buy a ticket!</h5>
-        <p class="card-text"></p>
-      </div>
+      <!--<div class="card shadow">-->
+        <div class="inner">
+          <img src="{% static 'client/images/cardimage1.jpg' %}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Buy a ticket!</h5>
+          <p class="card-text"></p>
+        </div>
+      <!--</div>-->
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <!--<div class="card shadow">-->
+        <div class="inner">
+          <img src="{% static 'client/images/cardimage2.jpg' %}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Enjoy your trip!</h5>
+          <p class="card-text"></p>
+        </div>
+      <!--</div>-->
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <!--<div class="card shadow">-->
+        <div class="inner">
+          <img src="{% static 'client/images/cardimage3small.jpg' %}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tickets for people of all ages!</h5>
+          <p class="card-text">We have a wide variety of tickets for every single age group, no discrimination and lower prices!</p>
+        </div>
+      <!--</div>-->
     </div>
   </div>
 </div>
 
-  <div class="col">
-    <div class="card">
-      <div class="card shadow">
-      <div class="inner">
-      <img src="{% static 'client/images/cardimage2.jpg' %}" class="card-img-top" alt="...">
-    </div>
-      <div class="card-body">
-        <h5 class="card-title">Enjoy your trip!</h5>
-        <p class="card-text"></p>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <div class="card shadow">
-      <div class="inner">
-      <img src="{% static 'client/images/cardimage3small.jpg' %}" class="card-img-top" alt="...">
-    </div>
-      <div class="card-body">
-        <h5 class="card-title">Tickets for people of all ages!</h5>
-        <p class="card-text">We have a wide variety of tickets for every single age group, no discrimination and lower prices!</p>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 {% endblock %}

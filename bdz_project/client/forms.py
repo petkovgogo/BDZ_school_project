@@ -71,9 +71,9 @@ class RegisterForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
-        username = User.objects.filter(username=username)
+        username_check = User.objects.filter(username=username)
 
-        if username.count():
+        if username_check.count():
             raise forms.ValidationError('Username already exists')
 
         return username
@@ -87,7 +87,7 @@ class RegisterForm(forms.Form):
 
         return email
 
-    def clean_password2(self):
+    def clean_conf_password(self):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('conf_password')
 
@@ -98,9 +98,9 @@ class RegisterForm(forms.Form):
 
     def save(self):
         user = User.objects.create_user(
-            self.cleaned_data['username'],
-            self.cleaned_data['email'],
-            self.cleaned_data['password']
+            self.cleaned_data.get('username'),
+            self.cleaned_data.get('email'),
+            self.cleaned_data.get('password')
         )
 
         return user
@@ -133,13 +133,6 @@ class RouteForm(forms.Form):
     destination = forms.ModelChoiceField(
         label='Choose a destination',
         queryset=Station.objects.order_by('station_name').all(),
-        required=False
-    )
-
-    departure_time = forms.TimeField(
-        label='Departure after',
-        widget=forms.TimeInput(format='%H:%M',
-                               attrs={'class': 'time-picker', 'autocomplete': 'off'}),
         required=False
     )
 
@@ -184,14 +177,6 @@ class RouteForm(forms.Form):
             raise forms.ValidationError('You must pick a destination')
 
         return destination
-
-    def clean_departure_time(self):
-        departure_time = self.cleaned_data.get('departure_time')
-
-        if departure_time is None:
-            raise forms.ValidationError('You must pick a departure time')
-
-        return departure_time
 
 
 class ChangeCredentialsForm(forms.Form):

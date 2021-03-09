@@ -1,3 +1,7 @@
+html {
+    overflow-x: hidden;
+}
+
 body {
     background-color: #555;
 }
@@ -14,36 +18,21 @@ label {
     height: 50px;
 }
 
-#brand {
-    z-index: 10;
-}
-
 .ui-datepicker {
     background: #ede7e6;
     border: 1px solid #555;
     color: #000000;
 }
 
-.carousel-item{
-    height: 40rem;
+.carousel-item {
     background: #777;
     color:#eca089;
     position: relative; 
     background-position: center;
     background-size: cover;
 }
-.carousel .item {
-    height: 300px;
-  }
-  
-.item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 300px;
-}
 
-.container{
+.container {
     position: absolute;
     bottom: 0;
     left: 5;
@@ -51,63 +40,67 @@ label {
     padding-bottom: 50px;
 }
 
-.btn{
+.btn {
     background :#eca089;
 }
 
-.rowjustify-content-center{
+.rowjustify-content-center {
     margin-right: 10%;
 }
 
-.inner{
+.inner {
     overflow: hidden;
+    height: 70%;
 }
 
-.inner img{
+.card {
+    height: 90%;
+}
+
+.inner img {
     transition: all 1.5s ease;
 }
 
-.inner:hover img{
+.inner:hover img {
     transform: scale(1.5);
 }
 
-.navbar-brand{
+.navbar-brand {
     width: 100px; 
     height: 50px;
 }
 
-.inner2{
-    overflow: hidden;
+.toast-info {
+    background-image: url("../images/police-1659481-1410003.png");
 }
 
-.inner2 img{
+.inner2 img {
     transition: all 1.5s ease;
 }
 
-.inner2:hover img{
-    transform: scale(1.5);
+.inner2:hover img {
+    transform: scale(1.25);
 }
 
 #ticket-link img {
     cursor: pointer;
 }
-  #ticket-link .gif-file {
-    display:none;
-  }
 
-  .card-block{
+#ticket-link .gif-file {
+    display:none;
+}
+
+.card-block {
   float: none;
   display: inline-block;
 }
 .carousel {
-    height: 65rem;
-  }
+    height: 40rem;
+}
 
-.carousel-item,
-.carousel-inner,
-.carousel-inner img {
+.carousel-inner
+{
   height: 100%;
-  width: 100;
 }
 
 .carousel-item {

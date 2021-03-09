@@ -64,9 +64,9 @@ def signup(request):
         form = RegisterForm(request.POST)
 
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=raw_password)
+            user = form.save()
+            user.save()
+
             login(request, user)
 
             return HttpResponseRedirect(reverse('client:index'))
