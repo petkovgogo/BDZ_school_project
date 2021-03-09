@@ -5,26 +5,42 @@
 <form action="{% url 'client:signup' %}" method="POST">
   {% csrf_token %}
 
-  <div class="form-group col-md-4 mb-3">
-    {% if form.errors %}
-      {% for field in form %}
-        {% for error in field.errors %}
+<img src="{% static 'client/images/regsiterbackgroundimage.jpg' %}" class="img-fluid w-100" alt="Responsive image">
 
-          <script type=text/javascript>toastr["error"]("{{ error }}", "Invalid credential");
-          </script>
+<div class = "card-style-Register">
+  <div class="card" id="register-card">
+     <div class="card-body">
+      <div class="shadow-lg p-3 mb-4 bg-white rounded">
+      <h5 class="card-title" id="register-card-title">Sign up</h5>
+      <div class="form-group col-md-4 mb-3" style="margin:0 auto;">
+        {% if form.errors %}
+          {% for field in form %}
+            {% for error in field.errors %}
+    
+              <script type=text/javascript>toastr["error"]("{{ error }}", "Invalid credential");
+              </script>
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+    
+        {% for field in form %}
+        <div>
+          <label class="register-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+          <div class="mb-3">
+            {{ field }}
+          </div>
+        </div>
         {% endfor %}
-      {% endfor %}
-    {% endif %}
-
-    {% for field in form %}
-    <div>
-      {{ field.label_tag }}
-      <div class="mb-3">
-        {{ field }}
+        <div class="register-button">
+        <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
+        </div>
+      </div>
+     
       </div>
     </div>
-    {% endfor %}
-    <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
   </div>
+</div>
+
+  
 </form>
 {% endblock %}

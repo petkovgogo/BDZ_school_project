@@ -1,0 +1,58 @@
+#register-card{
+    
+    width: 40%; 
+    height: 100%; 
+    margin: 0 auto; 
+    margin-top: -60rem ;
+}
+
+.register-label{
+    
+    width: 500%; 
+    margin-bottom: 10%;
+}
+
+#register-card-title{
+
+    margin-left: 15rem;
+    margin-bottom: 3rem;
+}
+
+.register-button{
+
+    margin-top: 1.5rem;
+    margin-left: 3rem;
+    margin-right: 4rem;
+}
+
+#id_first_name{
+   
+    width: 275%;
+    margin-left: -85%;
+}
+
+#id_last_name{
+   
+    width: 275%;
+    margin-left: -85%;
+}
+
+#id_email{
+    width: 275%;
+    margin-left: -85%;
+}
+
+#id_conf_password{
+    width: 275%;
+    margin-left: -85%;
+}
+
+#id_username{
+    width: 275%;
+    margin-left: -85%;
+}
+
+#id_password{
+    width: 275%;
+    margin-left: -85%;
+}
