@@ -3,8 +3,15 @@
 {% block content %}
 {% load static %}
 
-<form action="{% url 'client:auth' %}" method="POST">
+<form action="{% url 'client:auth' %}" method="POST" id="signInForm">
   {% csrf_token %}
+
+  <img src="{% static 'client/images/register_login-backgroundimage2.jpg' %}" class="img-fluid w-100" alt="Responsive image">
+
+<div class="card" id="login-card">
+  <div class="card-body">
+  <div class="shadow-lg p-4 mb-5 bg-white rounded">
+    <h5 class="card-title">Sign in</h5>
 
   {% if form.errors %}
     <script type=text/javascript>toastr["error"]("The email or password you entered is incorrect", "Invalid credentials")</script>
@@ -14,13 +21,21 @@
 
     {% for field in form %}
     <div>
-      {{ field.label_tag }}
-      <div class="mb-3">
-        {{ field }}
-      </div>
+      <label class="login-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+      
+      {{ field }}
+
     </div>
     {% endfor %}
-    <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
+
+    <div class="login-button">
+      <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
+    </div>
+
   </div>
 </form>
+
+</div>
+</div>
+
 {% endblock %}
