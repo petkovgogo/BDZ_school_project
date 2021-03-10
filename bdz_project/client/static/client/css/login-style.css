@@ -1,0 +1,32 @@
+#login-card{
+    width: 29%;
+    height: 24rem;
+    margin: 0 auto; 
+    margin-bottom: 5%; 
+    margin-top: -37%;
+}
+
+.card-title{
+    margin-left: 42.5%;
+}
+
+.login-label{
+    width: 500%; 
+    margin-left: 110%;
+    margin-top: 27%;
+}
+
+.login-button{
+    margin-top: 35%;
+    margin-left: 150%;
+}
+
+#id_username{
+    width: 275%;
+    margin-left: 50%;
+}
+
+#id_password{
+    width: 275%;
+    margin-left: 50%;
+}

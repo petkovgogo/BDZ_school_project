@@ -9,14 +9,14 @@ User = get_user_model()
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        label='Enter your username',
+        label='Enter your username:',
         max_length=30,
         required=False,
         widget=forms.TextInput(attrs={'autocomplete': 'off'})
     )
 
     password = forms.CharField(
-        label='Enter your password',
+        label='Enter your password:',
         max_length=30,
         min_length=8,
         required=False,

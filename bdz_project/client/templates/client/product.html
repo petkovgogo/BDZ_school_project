@@ -6,27 +6,44 @@
 <form class="needs-validation" action="{% url 'client:buy' %}" method="POST">
     {% csrf_token %}
 
-    <div class="form-group col-md-4 mb-3">
-        {% if form.errors %}
-        {% for field in form %}
-        {% for error in field.errors %}
-
-        <script type=text/javascript>toastr["error"]("{{ error }}", "Invalid choice" ); </script> 
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
+    
+    <img src="{% static 'client/images/product-image2.jpg' %}" class="img-fluid w-100" alt="Responsive image">
+    <img src="{% static 'client/images/bdz-bilet.jpg' %}" alt="" class="img-thumbnail" id="product-thumbnailImage">
+    
+    <div class="card" id="product-card">
+        <div class="card-body">
+            <h5 class="card-title" id="product-card-title">Enter the details for your purchase</h5>
+            <div class="form-group col-md-4 mb-3">
+                
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
         
         {% for field in form %} 
         <div>
             {{ field.label_tag }}
             <div class="mb-3">
                 {{ field }}
+                <script type=text/javascript>toastr["error"]("{{ error }}", "Invalid choice" ); </script> 
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+                
+                {% for field in form %} 
+                <div>
+                    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Next</button>
             </div>
         </div>
-        {% endfor %}
-        
-        <button class="btn btn-danger my-2 my-sm-0" type="submit">Next</button>
     </div>
+
+    
    
 </form>
 <script type="text/javascript">
