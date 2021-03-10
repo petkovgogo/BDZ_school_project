@@ -28,7 +28,10 @@ class Schedule(models.Model):
 
     week_days = models.PositiveSmallIntegerField(default=127)
     valid_from = models.DateField('valid from', default=None)
-    valid_until = models.DateField('valid until', default=None)
+    valid_until = models.DateField('valid until', default=None, null=True)
+
+    def __str__(self):
+        return str(self.train_id)
 
 
 class TrainStop(models.Model):
@@ -47,24 +50,29 @@ class TrainStop(models.Model):
     departure_time = models.TimeField(
         'departure time',
         default=None,
-        null=True
+        null=True,
+        blank=True
     )
 
     arrival_time = models.TimeField(
         'arrival time',
         default=None,
-        null=True
+        null=True,
+        blank=True
     )
 
     def __str__(self):
         if self.departure_time is None:
-            return str(self.station_id.station_name) + "\n-> Arrival: " + str(self.arrival_time)
+            return (str(self.schedule_id) + ": " + str(self.station_id.station_name) +
+                    "\n-> Arrival: " + str(self.arrival_time))
 
         if self.arrival_time is None:
-            return str(self.station_id.station_name) + "\n-> Departure: " + str(self.departure_time)
+            return (str(self.schedule_id) + ": " + str(self.station_id.station_name) +
+                    "\n-> Departure: " + str(self.departure_time))
 
-        return (str(self.station_id.station_name) + "\n-> Departure: " +
-        str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time))
+        return (str(self.schedule_id) + ": " + 
+                str(self.station_id.station_name) + "\n-> Departure: " +
+                str(self.departure_time) + "\n-> Arrival:  " + str(self.arrival_time))
 
 
 class TicketType(models.Model):
