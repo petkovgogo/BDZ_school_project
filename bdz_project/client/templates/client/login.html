@@ -3,6 +3,8 @@
 {% block content %}
 {% load static %}
 
+<link rel="stylesheet" href="{% static 'client/css/login-style.css' %}">
+
 <form action="{% url 'client:auth' %}" method="POST" id="signInForm">
   {% csrf_token %}
 
@@ -10,7 +12,7 @@
 
 <div class="card" id="login-card">
   <div class="card-body">
-  <div class="shadow-lg p-4 mb-5 bg-white rounded">
+  <div class="shadow-lg p-1 mb-5 bg-white rounded">
     <h5 class="card-title">Sign in</h5>
 
   {% if form.errors %}

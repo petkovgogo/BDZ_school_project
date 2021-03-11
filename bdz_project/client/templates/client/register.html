@@ -2,6 +2,9 @@
 {% block title %} Sign-up {% endblock %}
 {% block content %}
 {% load static %}
+
+<link rel="stylesheet" href="{% static 'client/css/product-styles.css' %}">
+
 <form action="{% url 'client:signup' %}" method="POST">
   {% csrf_token %}
 

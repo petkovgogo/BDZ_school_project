@@ -11,6 +11,11 @@ label{
     font-family: "Poppins", sans-serif;
 }
 
+#toast-container .toast.toast-info { 
+    background-image: url("../images/police-1659481-1410003.png") !important;
+    background-size: 10%;
+  }
+
 .gif-file {
     display: none;
 }
