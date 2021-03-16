@@ -1,0 +1,68 @@
+{% extends "client/base.html" %}
+{% block title %} Train choice {% endblock %}
+{% block content %}
+{% load static %}
+
+<form action="{% url 'client:ticket-create' %}" method="POST">
+{% csrf_token %}
+
+    <input type="hidden" name="train" id="id_train"/>
+    <input type="hidden" name="departure" id="id_departure"/>
+    <input type="hidden" name="arrival" id="id_arrival"/>
+    <input type="hidden" name="departure_time" id="id_departure_time"/>
+    <input type="hidden" name="arrival_time" id="id_arrival_time"/>
+    <input type="hidden" name="departure_date" id="id_departure_date" value="{{ departure_date|date:"Y-m-d" }}"/>
+
+    {% for row in rows %}
+    <div
+        data-trainId="{{ row.2 }}"
+        data-departureId="{{ row.0 }}"
+        data-arrivalId="{{ row.1 }}"
+        data-departureTime="{{ row.6|time:"H:i" }}"
+        data-arrivalTime="{{ row.7|time:"H:i" }}"
+    >
+
+        <table>
+            <tr>
+                <th>Train</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Duration</th>
+            </tr>
+            <tr>
+                <td>{{ row.5 }}</td>
+                <td>{{ row.6|time:"H:i" }}</td>
+                <td>{{ row.7|time:"H:i" }}</td>
+                <td>{{ row.8 }}</td>
+            </tr>     
+        </table>
+
+        <button class="btn btn-danger my-2 my-sm-0 choose" type="button">Choose</button>
+    </div>
+    {% endfor %}
+
+    <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
+</form>
+
+<script>
+    $(function() 
+    {
+        $('.choose').on('click', function(e) 
+        {
+            e.preventDefault();
+
+            let element = e.target;
+            let info = $(element).parent()[0];
+
+            debugger;
+
+            $('#id_train').val($(info).data('trainid'));
+            $('#id_departure').val($(info).data('departureid'));
+            $('#id_arrival').val($(info).data('arrivalid'));
+            $('#id_departure_time').val($(info).data('departuretime'));
+            $('#id_arrival_time').val($(info).data('arrivaltime'));
+        })
+    })
+</script>
+
+{% endblock %}
