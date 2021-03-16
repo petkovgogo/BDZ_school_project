@@ -13,6 +13,13 @@
     <input type="hidden" name="arrival_time" id="id_arrival_time"/>
     <input type="hidden" name="departure_date" id="id_departure_date" value="{{ departure_date|date:"Y-m-d" }}"/>
 
+    
+    
+    <img src="{% static 'client/images/choiceTrain2.jpg' %}" class="img-fluid w-100" alt="Responsive image">
+
+    <div class="card w-80" id="trainChoice-card">
+  <div class="card-body">
+  <div class="shadow-lg p-1 mb-5 bg-white rounded">
     {% for row in rows %}
     <div
         data-trainId="{{ row.2 }}"
@@ -21,28 +28,38 @@
         data-departureTime="{{ row.6|time:"H:i" }}"
         data-arrivalTime="{{ row.7|time:"H:i" }}"
     >
-
-        <table>
-            <tr>
-                <th>Train</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Duration</th>
-            </tr>
-            <tr>
-                <td>{{ row.5 }}</td>
-                <td>{{ row.6|time:"H:i" }}</td>
-                <td>{{ row.7|time:"H:i" }}</td>
-                <td>{{ row.8 }}</td>
-            </tr>     
-        </table>
-
-        <button class="btn btn-danger my-2 my-sm-0 choose" type="button">Choose</button>
-    </div>
+  <table class="table">
+  <thead class="thead-light">
+    <tr>
+        <th>Train</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>{{ row.5 }}</td>
+        <td>{{ row.6|time:"H:i" }}</td>
+        <td>{{ row.7|time:"H:i" }}</td>
+        <td>{{ row.8 }}</td>
+    </tr>
+  </tbody>
+</table>
+    <button class="btn btn-danger my-2 my-sm-0 choose" type="button">Choose</button>
+</div>
     {% endfor %}
-
+</div>
     <button class="btn btn-danger my-2 my-sm-0" type="submit">Submit</button>
+</div>
+
+        
+    </div>
+    
+
+    
 </form>
+
 
 <script>
     $(function() 

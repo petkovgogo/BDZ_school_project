@@ -1,0 +1,8 @@
+.wrapbox { width: 100%; margin: 0.5em; white-space: normal; vertical-align: top; }
+
+.anywhere { line-break: anywhere; }
+
+#ticketIssue-card{
+    width: 60%;
+    margin:0 auto;
+}

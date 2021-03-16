@@ -10,7 +10,7 @@
 
     
     <img src="{% static 'client/images/product-image2.jpg' %}" class="img-fluid w-100" alt="Responsive image">
-    <img src="{% static 'client/images/bdz-bilet.jpg' %}" alt="" class="img-thumbnail" id="product-thumbnailImage">
+    <img src="{% static 'client/images/bdz-bilet.jpg' %}" alt="Responsive image" class="img-thumbnail" id="product-thumbnailImage">
     
     <div class="card" id="product-card">
         <div class="card-body">
@@ -62,7 +62,7 @@
 
 </script>
 
-<script>
+<!--<script>
     
     var thumbnailImage = document.getElementById('product-thumbnailImage');
     var x = 0;
@@ -73,5 +73,5 @@
         setInterval(function(){thumbnailImage.style.right = x + "px"; x++; }, 20);
     }
 
-</script>
+</script> -->
 {% endblock %}

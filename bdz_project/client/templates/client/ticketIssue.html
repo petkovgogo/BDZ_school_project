@@ -1,21 +1,63 @@
 {% extends "client/base.html" %}
-{% block title %} Train issue {% endblock %}
+{% block title %} Ticket issue {% endblock %}
 {% block content %}
 {% load static %}
 
+
 <div>
-    Client email: {{ ticket.user.email }}
-    Ticket ID: {{ ticket.id }}
-    Ticket type: {{ ticket.ticket_type }}
-    From: {{ route.starting_station }}
-    To: {{ route.end_station }}
-    Departs on: {{ ticket.departure_date|date:"d.m.Y" }}
-    Departs at: {{ route.departure_date|time:"H:i" }}
-    Arrives at: {{ route.arrival_date|time:"H:i" }}
-    Duration: {{ route.duration|time:"H:i" }}h
-    Train: {{ route.train }}
+  <div class="card" id="ticketIssue-card">
+    <div class="card-body">
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Client email: {{ ticket.user.email }}</p>
+        </div>
+    
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Ticket ID: {{ ticket.id }}</p>
+        </div>
+
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Ticket type: {{ ticket.ticket_type }}</p>
+        </div>
+    
+    
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> From: {{ route.starting_station }}</p>
+        </div>
+  
+
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> To: {{ route.end_station }}</p>
+        </div>
+
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Departs on: {{ ticket.departure_date|date:"d.m.Y" }}</p>
+        </div>
+
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Departs at: {{ route.departure_date|time:"H:i" }}</p>
+        </div>
+
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Arrives at: {{ route.arrival_date|time:"H:i" }}</p>
+        </div>
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Duration: {{ route.duration|time:"H:i" }}h</p>
+        </div>
+       
+    
+        <div class="shadow-lg p-1 mb-2 bg-white rounded">
+          <p class="wrapbox anywhere"><br> Train: {{ route.train }}</p>
+        </div>
+    
+
 </div>
 
 <button onclick="location.href='{% url 'client:index' %}'" class="btn btn-danger my-2 my-sm-0" type="submit">Return to home</button>
-
+</div>
+</div>
 {% endblock %}
