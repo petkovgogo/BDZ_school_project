@@ -84,14 +84,15 @@ class TicketType(models.Model):
 
 
 class Ticket(models.Model):
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL, default=None, on_delete=models.CASCADE)
-    ticket_type_id = models.ForeignKey(
+    ticket_type = models.ForeignKey(
         TicketType,
         default=None,
         on_delete=models.CASCADE
     )
 
+    departure_date = models.DateField('departure date', default=None, null=True)
     created_date = models.DateTimeField('created date', default=timezone.now)
 
     def __str__(self):
@@ -99,37 +100,38 @@ class Ticket(models.Model):
 
 
 class Route(models.Model):
-    starting_station_id = models.ForeignKey(
+    starting_station = models.ForeignKey(
         Station,
         related_name='start_station',
         default=None,
         on_delete=models.CASCADE
     )
 
-    end_station_id = models.ForeignKey(
+    end_station = models.ForeignKey(
         Station,
         related_name='end_station',
         default=None,
         on_delete=models.CASCADE
     )
 
-    departure_date = models.DateTimeField('departure date', default=None)
-    arrival_date = models.DateTimeField('arrival date', default=None)
-    duration = models.FloatField(default=0.0)
-    train_id = models.ForeignKey(
+    departure_date = models.TimeField('departure date', default=None)
+    arrival_date = models.TimeField('arrival date', default=None)
+    duration = models.TimeField('duration', default=None)
+
+    train = models.ForeignKey(
         Train,
         default=None,
         on_delete=models.CASCADE
     )
 
-    ticket_id = models.ForeignKey(
+    ticket = models.ForeignKey(
         Ticket,
         default=None,
         on_delete=models.CASCADE
     )
 
     def __str__(self):
-        return self.starting_station_id.station_name + " -> " + self.end_station_id.station_name
+        return str(self.starting_station.station_name) + " -> " + str(self.end_station.station_name)
 
 
 class Discount(models.Model):

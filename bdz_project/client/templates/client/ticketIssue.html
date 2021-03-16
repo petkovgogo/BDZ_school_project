@@ -1,0 +1,21 @@
+{% extends "client/base.html" %}
+{% block title %} Train issue {% endblock %}
+{% block content %}
+{% load static %}
+
+<div>
+    Client email: {{ ticket.user.email }}
+    Ticket ID: {{ ticket.id }}
+    Ticket type: {{ ticket.ticket_type }}
+    From: {{ route.starting_station }}
+    To: {{ route.end_station }}
+    Departs on: {{ ticket.departure_date|date:"d.m.Y" }}
+    Departs at: {{ route.departure_date|time:"H:i" }}
+    Arrives at: {{ route.arrival_date|time:"H:i" }}
+    Duration: {{ route.duration|time:"H:i" }}h
+    Train: {{ route.train }}
+</div>
+
+<button onclick="location.href='{% url 'client:index' %}'" class="btn btn-danger my-2 my-sm-0" type="submit">Return to home</button>
+
+{% endblock %}

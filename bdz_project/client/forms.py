@@ -71,6 +71,10 @@ class RegisterForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
+
+        if username is None or username == '':
+            raise forms.ValidationError('Username cannot be empty')
+
         username_check = User.objects.filter(username=username)
 
         if username_check.count():
@@ -80,6 +84,10 @@ class RegisterForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+
+        if email is None or email == '':
+            raise forms.ValidationError('Email cannot be empty')
+
         password = User.objects.filter(email=email)
 
         if password.count():
@@ -87,9 +95,20 @@ class RegisterForm(forms.Form):
 
         return email
 
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+
+        if password is None or password == '':
+            raise forms.ValidationError('Password cannot be empty')
+
+        return password
+
     def clean_conf_password(self):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('conf_password')
+
+        if password2 is None or password2 == '':
+            raise forms.ValidationError('Confirm password cannot be empty')
 
         if password1 != password2:
             raise forms.ValidationError('Passwords do not match')
@@ -114,14 +133,6 @@ class RouteForm(forms.Form):
         widget=forms.DateInput(
             attrs={'class': 'date-picker', 'autocomplete': 'off'}),
         required=False
-    )
-
-    arrival_date = forms.DateField(
-        label='Choose an arrival date',
-        required=False,
-        input_formats=['%d.%m.%Y'],
-        widget=forms.DateInput(
-            attrs={'placeholder': 'oneway', 'class': 'date-picker', 'autocomplete': 'off'})
     )
 
     departure_station = forms.ModelChoiceField(
@@ -149,19 +160,6 @@ class RouteForm(forms.Form):
 
         return departure_date
 
-    def clean_arrival_date(self):
-        departure_date = self.cleaned_data.get('departure_date')
-        arrival_date = self.cleaned_data.get('arrival_date')
-
-        if arrival_date is None:
-            return departure_date
-
-        if departure_date >= arrival_date:
-            raise forms.ValidationError(
-                'Arrival date cannot be before departure date')
-
-        return departure_date
-
     def clean_departure_station(self):
         departure_station = self.cleaned_data.get('departure_station')
 
@@ -180,20 +178,6 @@ class RouteForm(forms.Form):
 
 
 class ChangeCredentialsForm(forms.Form):
-    username = forms.CharField(
-        label='Enter a new username',
-        max_length=20,
-        required=False,
-        widget=forms.TextInput(attrs={'autocomplete': 'off'})
-    )
-
-    email = forms.EmailField(
-        label='Enter your email',
-        max_length=40,
-        required=False,
-        widget=forms.TextInput(attrs={'autocomplete': 'off'})
-    )
-
     curr_password = forms.CharField(
         label='Enter your current password',
         max_length=30,
@@ -214,22 +198,6 @@ class ChangeCredentialsForm(forms.Form):
         self.request = kwargs.pop("request")
         self.user = self.request.user
         super(ChangeCredentialsForm, self).__init__(*args, **kwargs)
-
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-
-        if self.user.username == username:
-            raise forms.ValidationError('The new username must be different')
-
-        return username
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-
-        if self.user.email == email:
-            raise forms.ValidationError('The new email must be different')
-
-        return email
 
     def clean_curr_password(self):
         curr_password = self.cleaned_data.get('curr_password')
@@ -253,3 +221,30 @@ class ChangeCredentialsForm(forms.Form):
                 raise forms.ValidationError('New password must be different')
 
         return curr_password
+
+
+class TicketInfoForm(forms.Form):
+    train = forms.CharField(
+        max_length=10,
+        required=True
+    )
+
+    departure = forms.IntegerField(
+        required=True
+    )
+
+    arrival = forms.IntegerField(
+        required=True
+    )
+
+    departure_time = forms.TimeField(
+        required=True
+    )
+
+    arrival_time = forms.TimeField(
+        required=True
+    )
+
+    departure_date = forms.DateField(
+        required=True
+    )

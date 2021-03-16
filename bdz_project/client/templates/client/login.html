@@ -8,6 +8,7 @@
 <form action="{% url 'client:auth' %}" method="POST" id="signInForm">
   {% csrf_token %}
 
+  <input type="hidden" name="next" id="id_next" value="{{ request.GET.next }}"/>
   <img src="{% static 'client/images/register_login-backgroundimage2.jpg' %}" class="img-fluid w-100" alt="Responsive image">
 
 <div class="card" id="login-card">

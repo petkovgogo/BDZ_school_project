@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('buy-ticket/', views.BuyTicketView.as_view(), name='buyticket'),
     path('buy/', views.buy_ticket, name='buy'),
+    path('ticket-create/', views.ticket_create, name='ticket-create'),
     path('change-credentials/', views.ChangeCredsView.as_view(), name='change-credentials'),
     path('change/', views.change_credentials, name='change'),
     path('change-successful/', views.change_successful, name='change-successful'),
