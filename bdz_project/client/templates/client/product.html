@@ -59,5 +59,19 @@
         dropdown: true,
         scrollbar: false
     });
+
+</script>
+
+<script>
+    
+    var thumbnailImage = document.getElementById('product-thumbnailImage');
+    var x = 0;
+    var n = new Boolean(true);
+
+    if($(thumbnailImage).hover(function() { $('.img-thumbnail').toggle(); }) == n) {
+        
+        setInterval(function(){thumbnailImage.style.right = x + "px"; x++; }, 20);
+    }
+
 </script>
 {% endblock %}
